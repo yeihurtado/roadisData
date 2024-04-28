@@ -1,0 +1,236 @@
+{% extends 'layout.html' %}
+
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<style>
+    .chart-container {
+        height: 300px; /* Establece la altura fija para los contenedores de gráficos */
+    }
+</style>
+
+  <!--start main wrapper-->
+  <main class="main-wrapper">
+    <div class="main-content">
+      <!--breadcrumb-->
+      <div class="row">
+        <div class="col-md-12">
+            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+        <div class="col-md-7 card card-body">
+            <div id="map" style="width: 100%; height: 350px;"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart11" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart22" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart33" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart44"  style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart55"  style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart66"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart77"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart88"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+      </div><!--end row-->
+
+    </div>
+  </main>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    // Datos de ejemplo para los gráficos
+    const intensidadPorDia = { Lunes: 100, Martes: 150, Miércoles: 120, Jueves: 180, Viernes: 200 };
+    const evolucionIntensidad = [100, 120, 130, 140, 150, 160, 170];
+    const intensidadPorTipo = { Carros: [50, 60, 55, 70, 80], Camiones: [30, 35, 40, 45, 50], Motos: [20, 25, 30, 35, 40] };
+    const caracteristicasPromedio = { Velocidad: 70, Peso: 2000, Tiempo: 15 };
+    const distribucionVelocidad = [ { x: 'Mañana', y: 30 }, { x: 'Tarde', y: 60 }, { x: 'Noche', y: 10 } ];
+
+    // Configuración de los gráficos    
+    
+    const trace1 = { x: Object.keys(intensidadPorDia), y: Object.values(intensidadPorDia), type: 'bar' };
+    const layout1 = { title: 'Intensidad de Tráfico por Día' };
+    Plotly.newPlot('chart11', [trace1], layout1);
+
+    const values = Object.values(intensidadPorTipo).map(subarray => subarray.reduce((acc, curr) => acc + curr, 0)); // Suma de valores por tipo
+    const labels = Object.keys(intensidadPorTipo);
+    const trace2 = {
+        values: values,
+        labels: labels,
+        type: 'pie'
+    };
+    
+    const layout2 = { title: 'Distribución por Tipo de Vehículo' };
+    Plotly.newPlot('chart22', [trace2], layout2);
+
+    const trace3 = { x: [60, 70, 80,45,69,98,45], y: [2000, 3000, 2500, 2400,1800,2300,800], mode: 'markers', type: 'scatter', name: 'Velocidad vs. Peso' };
+    const layout3 = { title: 'Velocidad vs. Peso', xaxis: { title: 'Velocidad' }, yaxis: { title: 'Peso' } };
+    Plotly.newPlot('chart33', [trace3], layout3);
+
+    const trace4 = { x: ['Vehículo1', 'Vehículo2', 'Vehículo3', 'Vehículo4', 'Vehículo5'], y: [10, 15, 12, 18, 20], type: 'scatter', name: 'Caseta1' };
+    const trace5 = { x: ['Vehículo1', 'Vehículo2', 'Vehículo3', 'Vehículo4', 'Vehículo5'], y: [12, 14, 10, 17, 19], type: 'scatter', name: 'Caseta2' };
+    const layout4 = { title: 'Tiempo de Llegada a Casetas de Salida', xaxis: { title: 'Vehículo' }, yaxis: { title: 'Tiempo (min)' } };
+    Plotly.newPlot('chart44', [trace4, trace5], layout4);
+
+    const trace6 = { x: Object.keys(intensidadPorDia), y: Object.values(intensidadPorDia), type: 'bar', name: 'Intensidad' };
+    const layout5 = { title: 'Intensidad de Tráfico por Día' };
+    Plotly.newPlot('chart55', [trace6], layout5);
+
+    const trace7 = { x: ['Hora1', 'Hora2', 'Hora3', 'Hora4', 'Hora5'], y: intensidadPorTipo.Carros, type: 'bar', name: 'Carros' };
+    const trace8 = { x: ['Hora1', 'Hora2', 'Hora3', 'Hora4', 'Hora5'], y: intensidadPorTipo.Camiones, type: 'bar', name: 'Camiones' };
+    const trace9 = { x: ['Hora1', 'Hora2', 'Hora3', 'Hora4', 'Hora5'], y: intensidadPorTipo.Motos, type: 'bar', name: 'Motos' };
+    const layout6 = { title: 'Intensidad de Tráfico por Tipo de Vehículo' };
+    Plotly.newPlot('chart66', [trace7, trace8, trace9], layout6);
+
+    const trace10 = { r: [caracteristicasPromedio.Velocidad, caracteristicasPromedio.Peso, caracteristicasPromedio.Tiempo], theta: ['Velocidad', 'Peso', 'Tiempo'], type: 'scatterpolar', fill: 'toself', name: 'Características Promedio' };
+    const layout7 = { title: 'Características Promedio de los Vehículos' };
+    Plotly.newPlot('chart77', [trace10], layout7);
+
+    const trace11 = { x: distribucionVelocidad.map(d => d.x), y: distribucionVelocidad.map(d => d.y), type: 'scatter', fill: 'tozeroy', name: 'Distribución de Velocidad' };
+    const layout8 = { title: 'Distribución de Velocidad a lo largo del Día' };
+    Plotly.newPlot('chart88', [trace11], layout8);
+
+        // Función para cambiar al modo oscuro
+    function toggleDarkMode() {
+      const darkMode = document.body.classList.toggle('dark-mode');
+      if (darkMode) {
+        Plotly.relayout('chart11', {
+          'paper_bgcolor': 'rgba(0, 0, 0, 0.8)', // Cambiar el color de fondo del gráfico
+          'plot_bgcolor': 'rgba(0, 0, 0, 0.8)'   // Cambiar el color de fondo del área de trazado
+        });
+      
+        Plotly.relayout('chart22', {
+          'paper_bgcolor': 'rgba(0, 0, 0, 0.8)', // Cambiar el color de fondo del gráfico
+          'plot_bgcolor': 'rgba(0, 0, 0, 0.8)'   // Cambiar el color de fondo del área de trazado
+        });
+    
+        Plotly.relayout('chart33', {
+          'paper_bgcolor': 'rgba(0, 0, 0, 0.8)', // Cambiar el color de fondo del gráfico
+          'plot_bgcolor': 'rgba(0, 0, 0, 0.8)'   // Cambiar el color de fondo del área de trazado
+        });
+      } 
+      else {
+        Plotly.relayout('chart11', {
+          'paper_bgcolor': 'rgba(255, 255, 255, 1)', // Volver al color de fondo claro original
+          'plot_bgcolor': 'rgba(255, 255, 255, 1)'   // Volver al color de fondo claro original
+        });
+      
+        Plotly.relayout('chart22', {
+          'paper_bgcolor': 'rgba(255, 255, 255, 1)', // Volver al color de fondo claro original
+          'plot_bgcolor': 'rgba(255, 255, 255, 1)'   // Volver al color de fondo claro original
+        });
+      
+        Plotly.relayout('chart33', {
+          'paper_bgcolor': 'rgba(255, 255, 255, 1)', // Volver al color de fondo claro original
+          'plot_bgcolor': 'rgba(255, 255, 255, 1)'   // Volver al color de fondo claro original
+        });
+      }
+    }
+ 
+</script>
+
+<script>
+    // Crear mapa Leaflet
+    var map = L.map('map').setView([6.244203, -75.581211], 12);
+
+    // Agregar capa de mapa base de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Añadir capa de vista satelital de Esri al mapa
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri',
+      maxZoom: 18
+    }).addTo(map);
+
+    // Agregar marcador de ejemplo
+    L.marker([6.244203, -75.581211]).addTo(map)
+        .bindPopup('Parque Lleras')
+        .openPopup();
+
+    // Crear gráfico Plotly
+    var data = [{
+        type: 'scattermapbox',
+        lat: [6.244203],
+        lon: [-75.581211],
+        mode: 'markers',
+        marker: {
+            size: 14,
+            color: 'red'
+        },
+        text: ['Parque Lleras'],
+        hoverinfo: 'text'
+    }];
+
+    var layout = {
+        autosize: true,
+        hovermode: 'closest',
+        mapbox: {
+            center: {lat: 6.244203, lon: -75.581211},
+            zoom: 12,
+            style: 'open-street-map'
+        }
+    };
+
+    // Dibujar gráfico Plotly en el mapa
+    Plotly.newPlot('map', data, layout);
+</script>
+
+
+  <!--end main wrapper-->
+{% endblock %}

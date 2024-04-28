@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROADIS | CAMS Monterrey-saltillo</title>
+  <!--favicon-->
+	<link rel="icon" href="{{ url_for('static', filename='assets/images/favicon-32x32.png') }}" type="image/png">
+    
+
+
+  <!--plugins-->
+  <link href="{{ url_for('static', filename='assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/plugins/metismenu/metisMenu.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/plugins/metismenu/mm-vertical.css')}}">
+  <!--bootstrap css-->
+  <link href="{{ url_for('static', filename='assets/css/variables.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+  
+  <!--main css-->
+  <link href="{{ url_for('static', filename='assets/css/bootstrap-extended.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='sass/main.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='sass/dark-theme.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='sass/semi-dark.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='sass/bordered-theme.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='sass/responsive.css')}}" rel="stylesheet">
+
+</head>
+<body>
+    <!--start header-->
+  <header class="top-header">
+    <nav class="navbar navbar-expand align-items-center justify-content-between gap-3">
+      <div class="btn-toggle">
+        <a href="#offcanvasPrimaryMenu" data-bs-toggle="offcanvas"><i class="material-icons-outlined">menu</i></a>
+      </div>
+      <div class="search-bar w-50">
+        <div class="position-relative">
+          <input class="form-control rounded-5 px-5 search-control d-lg-block d-none" type="text" placeholder="Buscar">
+          <span class="material-icons-outlined position-absolute d-lg-block d-none ms-3 translate-middle-y start-0 top-50">search</span>
+          <span class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 search-close">close</span>
+          <div class="search-popup p-3">
+            <div class="card rounded-4 overflow-hidden">
+              <div class="card-header d-lg-none">
+                <div class="position-relative">
+                  <input class="form-control rounded-5 px-5 mobile-search-control" type="text" placeholder="Buscar">
+                  <span class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50">Buscar</span>
+                  <span class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 mobile-search-close">Cerrar</span>
+                 </div>
+              </div>
+              <div class="card-body search-content">
+                <p class="search-title">Busquedas recientes</p>
+                <div class="d-flex align-items-start flex-wrap gap-2 kewords-wrapper">
+                  <a href="javascript:;" class="kewords"><span>Corredor</span><i class="material-icons-outlined fs-6">search</i></a>
+                  </div>
+                <hr>
+                <p class="search-title">Tutoriales</p>
+                <div class="search-list d-flex flex-column gap-2">
+                  <div class="search-list-item d-flex align-items-center gap-3">
+                    <div class="list-icon">
+                      <i class="material-icons-outlined fs-5">play_circle</i>
+                    </div>
+                    <div class="">
+                      <h5 class="mb-0 search-list-title ">Consulta de Datos</h5>
+                    </div>
+                  </div>
+                  <div class="search-list-item d-flex align-items-center gap-3">
+                    <div class="list-icon">
+                      <i class="material-icons-outlined fs-5">shopping_basket</i>
+                    </div>
+                    <div class="">
+                      <h5 class="mb-0 search-list-title">Datos maestros</h5>
+                    </div>
+                  </div>
+  
+                  <div class="search-list-item d-flex align-items-center gap-3">
+                    <div class="list-icon">
+                      <i class="material-icons-outlined fs-5">laptop</i>
+                    </div>
+                    <div class="">
+                      <h5 class="mb-0 search-list-title">Recorrido general</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-center bg-transparent">
+                <a href="javascript:;" class="btn w-100">Mostrar todos los resultados</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav gap-1 nav-right-links align-items-center">
+        <li class="nav-item d-lg-none mobile-search-btn">
+          <a class="nav-link" href="javascript:;"><i class="material-icons-outlined">Busqueda</i></a>
+        </li>
+        
+        <li class="nav-item dropdown position-static">
+          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside" data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">done_all</i></a>
+          <div class="dropdown-menu dropdown-menu-end mega-menu shadow-lg p-4 p-lg-5">
+            <div class="mega-menu-widgets">
+             <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4 g-lg-5">
+                <div class="col">
+                  <div class="card rounded-4 shadow-none border">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-3">
+                        <!-- <div class="mega-menu-icon flex-shrink-0">
+                          <i class="material-icons-outlined">question_answer</i>
+                        </div> -->
+                        <img src="/static/assets/images/megaIcons/06.png" width="40" alt="">
+                        <div class="mega-menu-content">
+                           <h5>Proceso</h5>
+                           <p class="mb-0 f-14">Información detallada del proceso de análisis por el que serán tratados los datos.</p>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card rounded-4 shadow-none border">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-3">
+                        <img src="/static/assets/images/megaIcons/02.png" width="40" alt="">
+                        <div class="mega-menu-content">
+                           <h5>Análisis</h5>
+                           <p class="mb-0 f-14">Descripción de los análisis o interpreción implicita en los graficos o tablas según su diseño y filtro aplicado</p>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card rounded-4 shadow-none border">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-3">
+                        <img src="/static/assets/images/megaIcons/03.png" width="40" alt="">
+                        <div class="mega-menu-content">
+                            <h5>Recomendaciones</h5>
+                           <p class="mb-0 f-14">Conjunto de recomendaciones de uso, para garantizar una usabilidad optima de la aplicación.</p>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card rounded-4 shadow-none border">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-3">
+                        <img src="/static/assets/images/megaIcons/01.png" width="40" alt="">
+                        <div class="mega-menu-content">
+                           <h5>Preguntas Frecuentes</h5>
+                           <p class="mb-0 f-14">Preguntas y repuestas asociadas a la interacción con los datos, su ingesta, transformación y carga, que permitan una resolución acertiva de dudas.</p>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card rounded-4 shadow-none border">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-3">
+                        <img src="/static/assets/images/megaIcons/11.png" width="40" alt="">
+                        <div class="mega-menu-content">
+                           <h5>Descargas</h5>
+                           <p class="mb-0 f-14">Información sobre los modos de descarga, los tipos de archivos disponible y las recomendación de uso tras descarga de los archivos</p>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card rounded-4 shadow-none border">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start gap-3">
+                        <img src="/static/assets/images/megaIcons/13.png" width="40" alt="">
+                        <div class="mega-menu-content">
+                           <h5>Documentación</h5>
+                           <p class="mb-0 f-14">Descripción de la documentación, indicaciones de su uso y de los protocolos de acceso a esta según se requiera.</p>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+             </div><!--end row-->
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside" data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">apps</i></a>
+          <div class="dropdown-menu dropdown-menu-end dropdown-apps shadow-lg p-3">
+            <div class="border rounded-4 overflow-hidden">
+              <div class="row row-cols-3 g-0 border-bottom">
+                <div class="col border-end">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/01.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 1</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col border-end">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/02.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 2</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/03.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 3</p>
+                    </div>
+                  </div>
+                </div>
+              </div><!--end row-->
+
+              <div class="row row-cols-3 g-0 border-bottom">
+                <div class="col border-end">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/04.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 4</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col border-end">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/05.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 4</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/06.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 5</p>
+                    </div>
+                  </div>
+                </div>
+              </div><!--end row-->
+
+              <div class="row row-cols-3 g-0 border-bottom">
+                <div class="col border-end">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/07.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 6</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col border-end">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/08.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 7</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="app-wrapper d-flex flex-column gap-2 text-center">
+                    <div class="app-icon">
+                      <img src="/static/assets/images/apps/09.png" width="36" alt="">
+                    </div>
+                    <div class="app-name">
+                      <p class="mb-0">Aplicacion 8</p>
+                    </div>
+                  </div>
+                </div>
+              </div><!--end row-->
+
+              
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" data-bs-auto-close="outside" data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">notifications</i>
+            <span class="badge-notify">1</span>
+          </a>
+          <div class="dropdown-menu dropdown-notify dropdown-menu-end shadow">
+            <div class="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
+              <h5 class="notiy-title mb-0">Alertas</h5>
+
+            </div>
+            <div class="notify-list">
+              <div>
+                <a class="dropdown-item border-bottom py-2" href="javascript:;">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="">
+                      <img src="/static/assets/images/avatars/01.png" class="rounded-circle" width="45" height="45" alt="">
+                    </div>
+                    <div class="">
+                      <h5 class="notify-title">Alerta de Datos</h5>
+                      <p class="mb-0 notify-desc">No hay conexión con los dato, el sistema esta actualizado hasta hace 30 minutos.</p>
+                      <p class="mb-0 notify-time" id="current-date">Today</p>
+                    </div>
+                    <div class="notify-close position-absolute end-0 me-3">
+                      <i class="material-icons-outlined fs-6">close</i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+       
+      </ul>
+    </nav>
+  </header>
+  <!--end top header-->
+
+  <!--start mini sidebar-->
+  <aside class="mini-sidebar d-flex align-items-center flex-column justify-content-between">
+    <div class="user">
+      <a href="#offcanvasUserDetails" data-bs-toggle="offcanvas" class="user-icon">
+        <i class="material-icons-outlined">account_circle</i>
+      </a>
+    </div>
+    <div class="quick-menu">
+      <nav class="nav flex-column gap-1">
+        <a class="nav-link" href="\"><i class="material-icons-outlined">home</i></a>
+        <a class="nav-link" href="\"><i class="material-icons-outlined">poll</i></a>
+        <a class="nav-link" href="\"><i class="material-icons-outlined">apps</i></a>
+      </nav>
+    </div>
+    <div class="mini-footer dark-mode">
+      <a href="javascript:;" class="footer-icon dark-mode-icon">
+        <i class="material-icons-outlined">dark_mode</i>  
+      </a>
+    </div>
+  </aside>
+  <!--end mini sidebar-->
+
+    <main>
+        <!-- Aquí se insertará el contenido específico de cada página -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+  <!--start primary menu offcanvas-->
+  <div class="offcanvas offcanvas-start w-260" data-bs-scroll="true" tabindex="-1" id="offcanvasPrimaryMenu">
+    <div class="offcanvas-header border-bottom h-70">
+      <img src="/static/assets/images/logo1.png" width="160" alt="">
+      <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="offcanvas">
+        <i class="material-icons-outlined">close</i>
+      </a>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="sidebar-nav">
+        <ul class="metismenu" id="sidenav">
+          <li>
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="material-icons-outlined">home</i>
+              </div>
+              <div class="menu-title">Tableros Generales</div>
+            </a>
+            <ul>
+              <li><a href="\"><i class="material-icons-outlined">arrow_right</i>Entradas</a>
+              </li>
+              <li><a href="\"><i class="material-icons-outlined">arrow_right</i>Salidas</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-label">Controles</li>
+          <li>
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="material-icons-outlined">inventory_2</i>
+              </div>
+              <div class="menu-title">Proceso</div>
+            </a>
+            <ul>
+              <li><a href="component-cards-basic.html.htm"><i class="material-icons-outlined">arrow_right</i>Entradas</a>
+              </li>       
+              <li><a href="component-cards-advance.html.htm"><i class="material-icons-outlined">arrow_right</i>Salidas</a>
+              </li>              
+            </ul>
+          </li>
+          
+          <li>
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="material-icons-outlined"><span class="material-symbols-outlined">local_shipping
+                </i>
+              </div>
+              <div class="menu-title">Vehiculos</div>
+            </a>
+            <ul>
+              <li><a href="ecommerce-add-product.html.htm"><i class="material-icons-outlined">arrow_right</i>Tipos</a>
+              </li>
+              <li><a href="ecommerce-products.html.htm"><i class="material-icons-outlined">arrow_right</i>Destinos</a>
+              </li>
+              <li><a href="ecommerce-customers.html.htm"><i class="material-icons-outlined">arrow_right</i>Intensidades</a>
+              </li>
+            </ul>     
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+    <div class="offcanvas-footer p-3 border-top h-70">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="DarkMode">
+        <label class="form-check-label" for="DarkMode">Modo Oscuro</label>
+      </div>
+    </div>
+  </div>
+  <!--end primary menu offcanvas-->
+
+
+  <!--start user details offcanvas-->
+  <div class="offcanvas offcanvas-start w-260" data-bs-scroll="true" tabindex="-1" id="offcanvasUserDetails">
+    <div class="offcanvas-body">
+      <div class="user-wrapper">
+        <div class="text-center p-3 bg-light rounded">
+          <img src="/static/assets/images/avatars/01.png" class="rounded-circle p-1 shadow mb-3" width="120" height="120" alt="">
+          <h5 class="user-name mb-0 fw-bold">Nombre Usuario</h5>
+          <p class="mb-0">Rol usuario</p>
+        </div>
+        <div class="list-group list-group-flush mt-3 profil-menu fw-bold">
+          <a href="javascript:;" class="list-group-item list-group-item-action d-flex align-items-center gap-2 border-top"><i class="material-icons-outlined">person_outline</i>Perfil</a>
+          <a href="javascript:;" class="list-group-item list-group-item-action d-flex align-items-center gap-2"><i class="material-icons-outlined">local_bar</i>Configuración</a>
+          <a href="javascript:;" class="list-group-item list-group-item-action d-flex align-items-center gap-2"><i class="material-icons-outlined">dashboard</i>Mi trazabilidad</a>
+          <a href="javascript:;" class="list-group-item list-group-item-action d-flex align-items-center gap-2"><i class="material-icons-outlined">cloud_download</i>Historial Descargas</a>
+          <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2 border-bottom" id="logoutButtom" onclick="cerrarsesion()"><i class="material-icons-outlined">power_settings_new</i>Cerrar Sesión</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="offcanvas-footer p-3 border-top">
+      <div class="text-center">
+        <button type="button" class="btn d-flex align-items-center gap-2" data-bs-dismiss="offcanvas"><i class="material-icons-outlined">close</i><span>Cerrar</span></button>
+      </div>
+    </div>
+  </div>
+  <!--end user details offcanvas-->
+
+
+  <!--start switcher-->
+  <button class="btn btn-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop">
+    <i class="material-icons-outlined">tune</i>Personalización
+  </button>
+  
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="staticBackdrop">
+    <div class="offcanvas-header border-bottom h-70">
+      <div class="">
+        <h5 class="mb-0">Configuración de vista</h5>
+        <p class="mb-0">Seleccione la forma de visualización</p>
+      </div>
+      <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="offcanvas">
+        <i class="material-icons-outlined">close</i>
+      </a>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        <p>Visualizaciones</p>
+
+        <div class="row g-3">
+          <div class="col-12 col-xl-6">
+            <input type="radio" class="btn-check" name="theme-options" id="LightTheme" checked="">
+            <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="LightTheme">
+              <span class="material-icons-outlined">light_mode</span>
+              <span>Claro</span>
+            </label>
+          </div>
+          <div class="col-12 col-xl-6">
+            <input type="radio" class="btn-check" name="theme-options" id="DarkTheme">
+            <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="DarkTheme">
+              <span class="material-icons-outlined">dark_mode</span>
+              <span>Oscuro</span>
+            </label>
+          </div>
+          <div class="col-12 col-xl-6">
+            <input type="radio" class="btn-check" name="theme-options" id="SemiDarkTheme">
+            <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="SemiDarkTheme">
+              <span class="material-icons-outlined">contrast</span>
+              <span>Semi oscuro</span>
+            </label>
+          </div>
+          <div class="col-12 col-xl-6">
+            <input type="radio" class="btn-check" name="theme-options" id="BoderedTheme">
+            <label class="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4" for="BoderedTheme">
+              <span class="material-icons-outlined">border_style</span>
+              <span>Bordes ocultos</span>
+            </label>
+          </div>
+        </div><!--end row-->
+
+      </div>
+    </div>
+  </div>
+  <!--start switcher-->
+
+
+  <!--bootstrap js-->
+  <script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!--plugins-->  
+  <script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+  <!--plugins-->
+  <script src="{{ url_for('static', filename='assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
+ 
+  <script src="{{ url_for('static', filename='assets/plugins/metismenu/metisMenu.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/plugins/apexchart/apexcharts.min.js')}}"></script>
+
+  <script src="{{ url_for('static', filename='assets/js/index.js')}}"></script>
+  
+
+  <script src="{{ url_for('static', filename='assets/plugins/peity/jquery.peity.min.js')}}"></script>
+  <script>
+    $(".data-attributes span").peity("donut")
+  </script>
+  <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+  <script src="{{ url_for ('static', filename='assets/js/app.js')}}"></script>
+  <script>
+    
+    // Obtener la fecha actual
+    var currentDate = new Date();
+
+    // Obtener los componentes de la fecha
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1; // Se suma 1 porque los meses van de 0 a 11
+    var year = currentDate.getFullYear();
+
+    // Formatear la fecha como DD/MM/YYYY
+    var formattedDate = day + '/' + month + '/' + year;
+
+    // Mostrar la fecha en el elemento con id "current-date"
+    document.getElementById('current-date').textContent = formattedDate;
+</script>
+</body>
+</html>
